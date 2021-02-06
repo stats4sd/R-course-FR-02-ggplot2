@@ -7,7 +7,7 @@ output:
     df_print: default
 runtime: shiny_prerendered
 description: >
-  Learn about the basic syntax of R.
+  Utiliser ggplot2 pour faire des graphiques
 ---
 
 ```{r setup, include=FALSE}
