@@ -27,35 +27,35 @@ BeanSurvey<-mutate(BeanSurvey,GENDERHH=ifelse(is.na(GENDERHH),"male",as.characte
 ```
 
 
-## Colours  
+## La couleur (color)
 
 ![](https://youtu.be/-ibuoSs6AoA)
 
-Lets start by adding colours to the scatter plot we were just making. We have two different ways we can apply colours to a scatterplot - either:  
-a) make all of the points the same colour. 
-b) Or we can set the points to be different colours based on a column in the data.  
-Option a) involves changing the colour through the geometry; option b) will require us to change colours through adding an aesthetic.
+Commençons par ajouter des couleurs au nuage de points que nous venons de créer. Il y a deux façons différentes d'appliquer des couleurs à un nuage de points :  
+a) soit tous les points sont de la même couleur. 
+b) Soit nous pouvons définir des couleurs différentes pour les points en fonction d'une colonne des données.  
+L'option a) implique de changer la couleur par le biais de la géométrie ; l'option b) nous oblige à changer les couleurs en ajoutant une esthétique.
 
-Let's look at option a) first, and make all of our points red:
+Examinons d'abord l'option a), et mettons tous nos points en rouge :
 
 ```{r colour1,exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA)) + 
   geom_point(colour="red")
 ```
 
-If we are just adding colours superficially to make our plot look nicer, this is one way to achieve it. We could use the  <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target="_blank">the R colour chart</a> to pick out a nice shade to help our points look good.
+Si nous nous contentons d'ajouter des couleurs de manière superficielle pour que notre graphique soit plus joli, c'est une façon d'y parvenir. Nous pouvons utiliser le <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target="_blank">tableau de couleurs R</a> pour choisir une belle nuance qui aidera nos points à avoir une belle apparence.
 
-But we can add to the information being displayed by setting the colour of points to vary by a third column - for example gender of the household head. 
+Mais nous pouvons ajouter de l'information a notre graphique en faisant varier la couleur des points en fonction d'une colonne du jeu de données - par exemple le sexe du chef de ménage. 
 
 ```{r colour2,exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA,colour=GENDERHH)) + 
   geom_point()
 ```
 
-In this case we can see colours being automatically assigned to each of the unique values of the column we have mapping to the `colour` aesthetic. This will help us to now visualise the relationship between three variables from our data on the same plot.
+Dans ce cas, nous pouvons voir que des couleurs sont automatiquement attribuées à chacune des valeurs distinctes de la colonne que nous avons spécifié à l'esthétique `colour`. Cela va nous permettre de visualiser la relation entre trois variables de nos données sur le même graphique.
 
-However there are lots of ways to get this wrong, and in particular through mixing up these two different ways of assigning the colours. In the video above I illustrate this example of what happens if you specify a colour name in the aesthetic or specify a variable in the geometry.
-You can run examples of this below - make sure you don't fall into these traps!
+Cependant, il y a de nombreuses façons de se tromper, notamment en mélangeant ces deux façons différentes d'attribuer les couleurs. Dans la vidéo ci-dessus, j'illustre cet exemple de ce qui se passe si vous spécifiez un nom de couleur dans l'esthétique ou si vous spécifiez une variable dans la géométrie.
+Vous pouvez exécuter des exemples de ce type ci-dessous - assurez-vous de ne pas tomber dans ces pièges !
 
 ```{r bluered1,exercise=TRUE}
 
@@ -70,11 +70,11 @@ ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA)) +
   geom_point(colour=GENDERHH)
 ```
 
-Remember that both of those examples are wrong, but only one of them gives an error!
+Rappelez-vous que ces deux exemples sont faux, mais qu'un seul d'entre eux donne une erreur !
 
-## Fill
+## La couleur de remplissage (fill)
 
-When dealing with bar charts or boxplots in particular, although some other geometries as well, there are actually two different colour assignments that you need to be aware of. The colour aesthetic still works, as does setting the colour within the geometry.
+Lorsqu'il s'agit de diagrammes en barres ou de boxplots en particulier, mais aussi de certains autres types de graphique, il existe en fait deux attributions de couleurs différentes dont vous devez tenir compte. L'esthétique des couleurs fonctionne toujours, tout comme la définition de la couleur dans la géométrie.
 
 ```{r fill1, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = AGEHH,x=GENDERHH,colour=GENDERHH)) + 
@@ -86,18 +86,18 @@ ggplot(data =BeanSurvey,  aes(y = AGEHH,x=GENDERHH,colour=GENDERHH)) +
   geom_boxplot(colour="blue")
 ```
 
-But you will notice that this affects the points and lines of the box, but not the internal colour. So to change that attribute we would use `fill` instead of `colour`.
+Mais vous remarquerez que cela affecte les points et les lignes de la boîte, mais pas la couleur interne. Pour modifier cet attribut, il faut utiliser `fill` au lieu de `colour`.
 
 ```{r fill3, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = AGEHH,x=GENDERHH,fill=GENDERHH)) + 
   geom_boxplot()
 ```
 
-Similarly we could set a single colour for all boxes by using setting the `fill` colour within the `geom_boxplot` line of code.
+De même, nous pouvons définir une seule couleur pour toutes les cases en utilisant la couleur de remplissage dans la ligne de code `geom_boxplot`.
 
 
 
-*QUESTION: In the chunk below write the R code to produce a histogram of land area from the BeanSurvey dataset, and have it shaded in green. Then investigate what happens within geom_histogram if you map a categorical variable, like Gender of household head, to either the colour or fill aesthetic*
+*QUESTION: Dans la boite de code ci-dessous, écrivez le code R pour produire un histogramme de la superficie des terres de l'ensemble de données BeanSurvey, et faites en sorte qu'il soit coloré en vert. Ensuite, étudiez ce qui se passe dans geom_histogram si vous associez une variable catégorielle, comme le sexe du chef de ménage, à la couleur ou au remplissage esthétique.*
 
 ```{r shadehist,exercise=TRUE}
 
@@ -107,23 +107,26 @@ Similarly we could set a single colour for all boxes by using setting the `fill`
 ggplot(data=BeanSurvey,aes(x=LANDAREA))+
   geom_histogram(fill="green")
 
-#second plot - setting fill = GENDERHH gives us overlapping histograms with different colours. Can be useful for comparing distributions, but a little confusing, because the genders are stacked on top of each other so comparing is not easy. We will learn how to separate this out a little bit later in the course.
+#deuxième graphique - le paramètre fill = GENDERHH nous donne des histogrammes superposés avec des couleurs différentes.
+#Cela peut être utile pour comparer les distributions, mais c'est un peu déroutant,
+#car les genres sont empilés les uns sur les autres, ce qui rend la comparaison difficile.
+#Nous apprendrons à séparer cela un peu plus tard dans le cours...
 ggplot(data=BeanSurvey,aes(x=LANDAREA,fill=GENDERHH))+
   geom_histogram()
 ```
 
-## Scales  
+## Les échelles (scale_)  
 
-Lets now think about the variable containing the quantity of beans harvested in the long rains season, and see how it varies by village.
+Considérons maintenant la variable contenant la quantité de haricots récoltés pendant la longue saison des longues pluies, et voyons comment elle varie selon le village.
 
 ```{r scal1,exercise=TRUE} 
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
   geom_boxplot()
 ```
 
-Scales are useful to apply to modify the properties of how the aesthetics get turned into the plot. Scales modify the aesthetics. All scale functions are of the same generic format scale_*aesthetic*_*modifier*. 
+Les échelles `scale_` sont utiles pour modifier les propriétés et transformer les 'axes' dans le graphique. Les échelles modifient l'esthétique. Toutes les fonctions d'échelle ont le même format générique scale_*axe/esthetique*_*modificateur*. 
 
-This yield variable looks extremely skewed. There are a small number of farmers harvesting a very large quantity of beans. So most of our plot area is blank and it is hard to see the extent of the gdner difference! This is the sort of case where we might want to apply a log scale for harvest. Using the log10 scale modifier to the y axis then works like this.
+La variable de rendement semble extrêmement asymétrique. Il y a un petit nombre d'agriculteurs qui récoltent une très grande quantité de haricots. La majeur partie de notre graphique est donc vide et il est difficile de voir l'ampleur de la différence de rendement ! C'est le genre de cas où nous pourrions vouloir appliquer une échelle logarithmique pour la récolte. L'utilisation du modificateur d'échelle log10 sur l'axe des y fonctionne alors comme suit.
 
 ```{r scal1a,exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -131,12 +134,12 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()
 ```
 
-This really helps us to see the differences by gender which weren't clear before, and makes the graph look much better due to a more appropriate use of space! However, there is a trade-off here - because there were many farmers with a total of 0 beans harvested, then doing the log transformation forces these to be removed from the plot. This is because log(0) cannot be calculated. This means the plot only shows those farmers who did harvest more than 0 beans. This is why we see an error message telling us "Removed 21 rows containing non-finite values" - log(0) is the non-finite value this is referring to.
+Cela nous aide vraiment à voir les différences par sexe qui n'étaient pas claires auparavant, et rend le graphique beaucoup plus beau grâce à une utilisation plus appropriée de l'espace ! Cependant, il y a un compromis à faire ici - parce qu'il y avait de nombreux agriculteurs avec un total de 0 haricot récolté, la transformation logarithmique les oblige à être retirés du graphique. En effet, le log(0) ne peut pas être calculé. Cela signifie que le graphique ne montre que les agriculteurs qui ont récolté plus de 0 haricot. C'est pourquoi nous voyons un message d'avertissement nous disant "Removed 21 rows containing non-finite values (stat_boxplot)" (21 lignes contenant des valeurs non finies ont ete supprimees) - log(0) est la valeur 'non finie' à laquelle il est fait référence.
 
-This could still be a useful plot to interpret, but we always need to be careful when using a log transformation in case there are zero values in our variable. A better option here may be to calculate the beans harvested per hectare, which should make results more comparable. We will learn how to do that in a later module of this course when we come to learn about data manipulation with `dplyr`.
+Ce graphique peut toujours être utilisé pour interpréter les données, mais il faut toujours être prudent lorsqu'on utilise une transformation logarithmique, au cas où notre variable contiendrait des valeurs nulles. Une meilleure option ici pourrait être de calculer les haricots récoltés par hectare, ce qui devrait rendre les résultats plus comparables. Nous apprendrons comment faire cela dans un module ultérieur de ce cours, lorsque nous apprendrons à manipuler les données avec `dplyr`.
 
 
-A similar principle of `scale` applies to colours as well - so if we want to set the colours for our gender groups instead of relying on the R defaults this would also be through an additional call to `scale`. There is a number of different modifiers available for `fill` or `colour` aesthetics - a simple one would be the `manual` modifier which lets us specify exactly what colours to use.
+Ce principe de modification des echelles/axes en utilisant `scale_` s'applique également aux echelles de couleurs - donc si nous voulons définir les couleurs pour nos groupes de sexe au lieu de nous cantonner aux valeurs par défaut de R, on peut également faire cela avec un modificateur d'echelle `scale_`. Il y a un certain nombre de modificateurs différents disponibles pour l'esthétique `fill` ou `colour` - l'un de ceux-ci, le modificateur `manual`, nous permet de spécifier exactement les couleurs que l'on souhaite utiliser.
 
 
 ```{r scale2,exercise=TRUE}
@@ -146,13 +149,14 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
       scale_fill_manual(values=c("purple","yellow"))
 ```
 
-Here you need to make sure that:  
-a) you have the correct number of colours, 1 for each group. Remember to use the `c()` function to combine the colours together, and to use a comma between each colour  
-b) the names are all colours in R and that you have quotation marks correctly placed around all of them.
+Ici, vous devez vous assurer que  
+a) vous avez le bon nombre de couleurs, 1 pour chaque groupe. N'oubliez pas d'utiliser la fonction `c()` pour combiner les couleurs ensemble, et d'utiliser une virgule entre chaque couleur.  
+b) les noms de couleur choisies sont en effet des couleurs que R connait.
+c) vous avez placé des guillemets correctement autour de chacun des noms de couleur.
 
-R has some strange colours built in by name.
+R connait certains nom originaux de couleurs.
 
-So for example this is possible:
+Ainsi, par exemple, R connait les couleurs 'chartreuse' et 'blanchedalmond' :
 
 ```{r scale3, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -161,23 +165,22 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
       scale_fill_manual(values=c("chartreuse","blanchedalmond"))
 ```
 
-But this will give us some transparent boxes since the colours are not recognised by R.
+Par contre R ne connait pas les couleurs 'olive' ou 'azur' et dans ce cas, R produira des boîtes transparentes.
 
 ```{r itsmakingmeblue,error=TRUE, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
   geom_boxplot()+
     scale_y_log10()+
-      scale_fill_manual(values=c("mediumred","paleblue"))
+      scale_fill_manual(values=c("olive","azur"))
 ```
 
-As a reminder,
- <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target="_blank">the R colour chart</a> can help here.
+Pour rappel, vous trouverez <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target="_blank"> ici </a> les couleurs reconnues pas R par defaut.
 
 
-One of the other useful modifiers for colours is `brewer`. Instead of picking out individual colours for each value you pick out a pre-existing colour palette. You can see the colour palettes available 
- <a href="https://colorbrewer2.org/" target="_blank">here</a>. The palette names in R correspond to the 'scheme' names on that website which you can see in the URL when you choose a palette. 
+L'un des autres modificateurs utiles pour les couleurs est `brewer`. Au lieu de choisir des couleurs individuelles pour chaque valeur, vous choisissez une palette de couleurs préexistante. Vous pouvez voir les palettes de couleurs disponibles 
+ <a href="https://colorbrewer2.org/" target="_blank">ici</a>. Les noms de palette dans R correspondent aux noms indique apres "scheme=" sur ce site Web, que vous pouvez voir dans l'URL lorsque vous cliquez sur une palette. 
 
-As mentioned in the video, I really like the "Dark2" palette for its bold colours, which are clearly distinguishable. Although a lot of colour choice comes down to specific applications or personal preference.
+Comme indiqué dans la vidéo, j'aime beaucoup la palette "Dark2" pour ses couleurs vives (deuxieme palette lorsque vous choisissez "qualitative" pour "nature of your data" sur le site indique au dessus). Cette palette donne souvent des couleurs qui se distinguent clairement sur un graphique. Cependant gardez en tête que la pertinence d'un choix de couleurs dépend aussi fortement du type de données et du graphique que l'on souhaite produire... et biensur il y a également les préférences personnelles de chacun.
 
 ```{r colour4, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -187,7 +190,7 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
 ```
 
 
-**QUESTION: Using everything you have learnt so far: in the code chunk below make an (informative) chart showing the relationship between the quantity of beans harvested in the long rains season, `BEANSHARVESTED_LR` and the type of labour used, `LABOR`
+**QUESTION : En utilisant tout ce que vous avez appris jusqu'à présent : dans le morceau de code ci-dessous, faites un graphique (informatif) montrant la relation entre la quantité de haricots récoltés pendant la longue saison des pluies, `BEANSHARVESTED_LR` et la main d'œuvre utilisée, `LABOR`.
 
 ```{r trumphot, exercise=TRUE,error=TRUE}
 ggplot(data=X,aes(y=Y,x=X))+
@@ -195,28 +198,29 @@ ggplot(data=X,aes(y=Y,x=X))+
 
 ```
 
-## Layers
+## Ajouter des couches
 
-ggplot2 graphs can have make graphs with multiple geometries layered on top of each other, providing the aesthetics for those geometries are the same.
+Les graphiques de ggplot2 peuvent comporter des graphiques avec plusieurs géométries superposées, à condition que l'esthétique de ces géométries soit la même.
 
-Let's go back to the scatter plot we made earlier about age of the household head and land area
+Revenons au nuage de points que nous avons réalisé précédemment montrant la superficie du terrain en fonction de l'âge du chef de ménage:
 
 ```{r layer1,exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA)) + 
   geom_point()
 ```
 
-We couldn't really decide earlier if there was a relationship between these two variables - it didn't really seem like there was. But we can add a "line of best fit" onto the plot using `geom_smooth` - by default this fits a smoothing function onto the plot, which will help us to determine whether or not there is a relationship, and whether this relationship is likely to be linear, or more complicated. 
+Nous ne pouvions pas vraiment décider plus tôt s'il y avait une relation entre ces deux variables - il ne semblait pas y en avoir. Mais nous pouvons ajouter une "courbe d'ajustement" sur le graphique en utilisant `geom_smooth` - par défaut, cela ajoute une courbe de lissage sur le graphique, qui nous aidera à déterminer s'il y a ou non une relation, et si cette relation semble linéaire, ou plus compliquée. 
 
-In ggplots we can simply add more layers to a graph by continuing to add a `+` at the end of each layer. 
+Dans `ggplot`, nous pouvons ajouter des couches supplémentaires à un graphique en ajoutant simplement un `+` à la fin de chaque couche. 
+
 ```{r layer2,exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA)) + 
   geom_point()+
     geom_smooth()
 ```
 
-The shaded area around the line represents a 95% confidence interval around the trend being plotted.
-The ordering of the layers determines what will appear on top; look at the difference if we reverse the order of `geom_point()` and `geom_smooth()`.
+La zone grisee au dessus et au dessous de la courbe représente un intervalle de confiance à 95% autour de notre tendance.
+Notez que l'ordre dans lequel vous indiquez les couches détermine ce qui apparaîtra au dessus ; regardez la différence si nous inversons l'ordre de `geom_point()` et `geom_smooth()`.
 
 
 ```{r layer3,exercise=TRUE}
@@ -225,9 +229,9 @@ ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA)) +
   geom_point()
 ```
 
-If you are struggling to spot the difference - look closely at where the points intersect with the line.
+Ce n'est pas évident a voir ici, mais si vous regardez attentivement, vous verrez que le point proche de la verticale 40 qui était sous la courbe dans le graphique précédent, est maintenant au dessus de la courbe!
 
-This example of layering works because geom_smooth and geom_point both have the same required aesthetics - a numeric variable mapped to `x` and a numeric variable mapped to `y`. If we tried to add, for example, a boxplot on top then we would receive a slightly strange looking plot, and a warning message since the aesthetics for boxplot are not completely compatible. 
+Cet exemple de superposition fonctionne parce que `geom_smooth` et `geom_point` ont tous deux la même esthétique requise - une variable numérique sur l'axe des `x` et une variable numérique sur l'axe des `y`. Si on essayait d'ajouter, par exemple, un boxplot par dessus, on obtiendrait un tracé un peu étrange, et un message d'avertissement puisque l'esthétique du boxplot n'est pas complètement compatible. 
 
 ```{r layer4,exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA))+ 
@@ -235,9 +239,9 @@ ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA))+
   geom_boxplot()
 ```
 
-Because the `x` aesthetic is optional for `geom_boxplot` this example chooses to ignore the incompatible variable (`AgeHH`) being plotted on that axis and just draws a single boxplot. This is probably not going to give us a useful graph!
+Comme l'esthétique `x` est optionnelle pour `geom_boxplot`, cet exemple choisit d'ignorer la variable incompatible (`AgeHH`) qui est tracée sur cet axe et dessine juste un seul boxplot. Cela ne va probablement pas nous donner un graphique utile !
 
-If we tried to layer `geom_bar` then we would get an error, since the aesthetics needed for `geom_bar` would be incompatible with the aesthetics we have for `geom_point`.
+Et si nous essayions de superposer `geom_bar`, nous obtiendrions une erreur, car l'esthétique nécessaire pour `geom_bar` serait incompatible avec celle que nous avons pour `geom_point`.
 
 ```{r layer5,exercise=TRUE,error=TRUE}
 ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA))+ 
@@ -245,11 +249,11 @@ ggplot(data = BeanSurvey,  aes(x = AGEHH,y=LANDAREA))+
   geom_bar()
 ```
 
-## Facets
+## Les facettes (facet_)
 
 ![](https://youtu.be/VAsRe33lkCM)
 
-We've seen how to add variables to a plot using aesthetics. Another way, for categorical variables, is to split your plot into facets, which are subplots that each display one subset of the data. For example, if we take the boxplots we made earlier, with `BEANSHARVESTED_LR` by `GENDERHH`, plotted on the log10 scale, we can use `facet_wrap` to split this plot into two panels defined by the `VILLAGE` variable.
+Nous avons vu comment ajouter des variables à un graphique en utilisant l'esthétique. Pour les variables catégorielles, il est aussi possible d'utiliser une autre technique, celle de diviser votre graphique en facettes, qui sont des sous-graphiques qui affichent chacun un sous-ensemble des données. Par exemple, si nous prenons les boxplots que nous avons fait plus tôt, montrant la variable `BEANSHARVESTED_LR` en fonction de `GENDERHH`, en utilisant l'échelle log10 pour l'axe des y, nous pouvons utiliser `facet_wrap` pour diviser ce graphique en deux panneaux définis par la variable `VILLAGE`.
 
 ```{r facet1, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -259,27 +263,24 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
           facet_wrap(~VILLAGE)
 ```
 
-This plot shows us quite clearly there is a large difference in the distributions amount harvested between the two villages. And also that in Kimbugu, where harvested amounts are higher, there is quite a large difference by gender. WHereas in Lwala, where harvested bean quantities are lower, there is only a very minor difference by gender.
+Ce graphique nous montre clairement qu'il y a une grande différence dans les distributions des quantités récoltées entre les deux villages. Et aussi qu'à Kimbugu, où les quantités récoltées sont plus élevées, il y a une différence assez importante par sexe. Alors qu'à Lwala, où les quantités de haricots récoltés sont plus faibles, il n'y a qu'une faible différence entre les ménages gérés par un homme et ceux gérés par une femme.
 
-Be careful not to miss the `~` before `VILLAGE`. This is used to define a formula in R. e.g. something like "y=x" in R terms is coded as `y~x`. Within `facet_wrap` the `y` is implicit (it is essentially the graph specification). The `~` tells it to make different panels based on each unique value of x (in this case - gender). It's used in many R functions, and you'll see this appearing again later in the course.
+Faites attention à ne pas manquer le `~` devant `VILLAGE`. Il est utilisé pour définir une formule dans R. Par exemple, une formule ou équation du genre "y=x" s'écrit `y~x` en R. Dans `facet_wrap`, le `y` est implicite (c'est en quelque sorte le graphique entier qui est utilisé comme y). Le `~` lui, demande a R de découper les données selon les variables indiquées a sa droite et de créer le graphique pour chaque sous-ensemble. Dans ce cas la variable indiquée a droite est `VILLAGE`, et R a donc créé notre graphique pour chaque village. `~` est utilisé dans de nombreuses fonctions R, et vous le verrez apparaître à nouveau plus tard dans le cours.
 
 
-Always consider exactly which variables would make sense in which position of your plot. Trial and error can be very helpful here, as it sometimes becomes only clear which option shows the story most clearly after comparing different options.
+Réfléchissez toujours à la position exacte des variables dans votre graphique. Il est souvent utile d'expérimenter, car ce n'est parfois qu'après avoir comparé différentes options que l'on voit clairement quelle option présente l'histoire que l'on souhaite raconter avec nos données de la manière la plus claire.
 
-For example, the way we have orientated the graph above places the focus on making gender differences within each of the two villages. But it makes it a little harder to compare village differences within each gender.
+Par exemple, la façon dont nous avons orienté le graphique ci-dessus met l'accent sur les différences entre les sexes des chefs de ménage dans chacun des deux villages. Mais il est un peu plus difficile de comparer les différences entre les villages pour chaque sexe.
 
-**QUESTION:Modify the previous code, to reverse the orientation so that `VILLAGE` is on the x axis, and we use facets for `GENDERHH`**
+**QUESTION : Modifiez le code précédent, pour inverser l'orientation de sorte que `VILLAGE` soit sur l'axe des x, et que nous utilisions des facettes pour `GENDERHH` **.
 
 ```{r facet3, exercise=TRUE}
 
 ```
 
 ```{r facet3-solution}
-#Remember to change the fill aesthetic as well as the x aesthetic
-#I also moved gender to make up the rows and age group to make the columns, as my boxes were being squashed too much otherwise
-#This does mean that the x axis labels are now illegible though!
-#However the colour coding means that we can easily distinguish the parties without the x axis labels anyway
-#We will learn how to remove, or modify, those x axis labels in the next section about themes
+#N'oubliez pas de changer l'esthétique du remplissage ainsi que l'esthétique du x.
+#Nous apprendrons à supprimer ou à modifier les étiquettes de l'axe des x dans la prochaine section sur les thèmes.
 
 ggplot(data = BeanSurvey,  aes(y =BEANSHARVESTED_LR ,x=VILLAGE,fill=VILLAGE)) + 
   geom_boxplot()+
@@ -288,11 +289,11 @@ ggplot(data = BeanSurvey,  aes(y =BEANSHARVESTED_LR ,x=VILLAGE,fill=VILLAGE)) +
           facet_wrap(~GENDERHH)
 ```
 
-Hopefully you will see in this example that it becomes much easier to compare our villages against each other. But more difficult to compare the genders against each other.
+J'espère que vous verrez dans cet exemple qu'il devient beaucoup plus facile de comparer nos villages les uns aux autres. Mais plus difficile de faire des comparaisons entre les sexes du chef de ménage.
 
-## Labels
+## Les Étiquettes (labs)
 
-The plot that we made, showing how bean harves has varied by gender and village is quite useful. We might now be starting to get excited about sharing our results with other people, or including this plot in a report or presentation.
+Le graphique que nous avons réalisé, montrant comment les récoltes de haricots ont varié selon le sexe et le village, est très utile. Nous pourrions maintenant commencer à nous enthousiasmer à l'idée de partager nos résultats avec d'autres personnes, ou d'inclure ce graphique dans un rapport ou une présentation.
 
 ```{r,facet3a, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -302,9 +303,9 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
           facet_wrap(~VILLAGE)
 ```
 
-But, we should first start thinking about making this plot more informative. Let's start by adding labels for our axes and providing titles. 
+Mais nous devons d'abord penser à rendre ce graphique plus informatif. Commençons par ajouter des étiquettes pour nos axes et fournir des titres. 
 
-The function `labs()` let's us label different aspects of the plot. We can label any of the aesthetics that have mapped in the plot - let's start by labelling the x and y axes.
+La fonction `labs()` nous permet d'étiqueter différents aspects du graphique. Nous pouvons étiqueter n'importe quelle esthétique qui a été renseignée dans le graphique - commençons par étiqueter les axes x et y.
 
 ```{r,label1, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -312,12 +313,12 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)")
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)")
 ```
 
-Within this function we can write anything we like when assigning what the labels should be, as long as it is contained within quotation marks `" "`.
+Dans cette fonction, on peut écrire ce que l'on veut lorsqu'on attribue les étiquettes, tant que cela est contenu entre guillemets `" "`.
 
-Notice in this example that the x axis has been labelled with "Gender of Household Head", but the legend has still been labelled with "GENDERHH". This is because we are labelling the aesthetics, not the variables themselves. And the "GENDERHH" label is associated with the `fill` aesthetic. So  we will also need to include a label for the `fill` as well as for the `x` and `y`.
+Remarquez dans cet exemple que l'axe des x a été étiqueté avec "Sexe du chef de ménage", mais que la légende reste étiquetée "GENDERHH". Cela s'explique par le fait que nous étiquetons l'esthétique, et non les variables elles-mêmes. Et l'étiquette "GENDERHH" est associée à l'esthétique `fill`. Nous devrons donc également inclure une étiquette pour `fill`.
 
 ```{r label2, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -325,12 +326,12 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head")
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage")
 ```
 
 
-There are also additional features we can label - such as the `title`, `subtitle` and `caption`
+Il existe également d'autres éléments que nous pouvons étiqueter, tels que le "titre" (title), le "sous-titre" (subtitle) et la "légende" (caption).
 
 ```{r label3, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -338,29 +339,29 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")
 ```
 
-Things are starting to look good! But we may also want to make some further tweaks to the general visual appearance of certain aspects of our plot.
+Il commence à avoir une bonne tête ! Mais il se peut que nous voulions encore apporter quelques modifications à l'aspect visuel général de certains aspects de notre graphique.
 
-## Themes
+## Les Thèmes (theme)
 
-Themes refers to styling of the non data elements of your plot. So the label fonts, colours and sizes, the titles, and the background lines and boxes. ggplot2 has a huge number of theme options that allows you to control almost every aspect of your plot which becomes important when you want to present or publish your graphs. It's worth knowing how to find the options you are looking for when customising the themes - there are too many different things to remember! A lot of different examples are shown through the ggplot2 site <a href="https://ggplot2.tidyverse.org/reference/theme.html" target="_blank">here</a>.
+Les thèmes font référence au style des éléments non liés aux données de votre graphique, comme les polices de caractère ou bien les couleurs et les tailles des étiquettes, des titres, des axes ou de l'arrière-plan. ggplot2 dispose d'un grand nombre d'options de thèmes qui vous permettent de contrôler presque tous les aspects de votre graphique, ce qui devient important lorsque vous souhaitez présenter ou publier vos graphiques. Il est important de savoir comment trouver les options que vous recherchez lorsque vous personnalisez les thèmes, parce qu'il n'est pas possible de tout retenir. Il y a trop de choses que l'on peut faire ! De nombreux exemples sont présentés sur le site ggplot2 <a href="https://ggplot2.tidyverse.org/reference/theme.html" target="_blank">ici</a>.
 
 
-For example, lets say that I want to make my x axis labels gigantic for some reason. 
+Par exemple, disons que je veux rendre mes étiquettes d'axe x gigantesques pour une raison quelconque. 
 
-We need to find which argument modifies the x axis labels. If we look into the documentation we can find the argument `axis.text.x`.
+Nous devons trouver quel argument modifie les étiquettes de l'axe des x. Si nous regardons dans la documentation, nous pouvons trouver l'argument `axis.text.x`.
 
-Because this is a text component we then need to use a function `element_text`, which will allow to customise the appearance of this text. 
+Comme il s'agit d'un composant texte, nous devons ensuite utiliser une fonction `element_text`, qui permettra de personnaliser l'apparence de ce texte. 
 
-The `element` functions exist so that we can customise the components relating to specific types of element - `element_text`, `element_line`,`element_rect` (for 'rectangles' or boxes) are the most commonly used. 
+Les fonctions `element_` existent pour que nous puissions personnaliser les composants relatifs à des types d'éléments spécifiques - `element_text`, `element_line`, `element_rect` (pour les 'rectangles' ou les boîtes) sont les plus couramment utilisées. 
 
-Within `element_text` there are then lots of options we can change, but to make massive labels the one we will need to modify is size.
+Dans `element_text`, il y a beaucoup d'options que nous pouvons changer, mais pour faire des étiquettes massives, celle que nous devrons modifier est la taille (`size`).
 
 ```{r sixe20, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -368,17 +369,17 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")+
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")+
     theme(axis.text.x = element_text(size=20))
 ```
 
-This is probably a little bit too big!
+C'est probablement un peu trop gros !
 
-**QUESTION Using some trial and error set a more sensible value for the font size. Once you have done this, now also look into the documentation to see if you can work out how to make the x axis text appear in bold**
+**QUESTION En faisant quelques experimentations, définissez une valeur plus raisonnable pour la taille de la police. Une fois que vous avez fait cela, consultez également la documentation pour voir si vous pouvez trouver comment faire apparaître le texte de l'axe des x en gras**.
 
 ```{r boldsize, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -386,35 +387,35 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")+
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")+
     theme(axis.text.x = element_text(size=20))
 ```
 
 ```{r boldsize-solution}
-#face=1 is normal, face=2 is bold, face=3 is italic
+#face=1 pour normal, face=2 pour mettre en gras, face=3 pour mettre en italic
 
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
   geom_boxplot()+
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")+
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")+
     theme(axis.text.x = element_text(size=6,face = 2))
 ```
 
-It is worth getting comfortable with looking into the documentation for how to modify various aspects of these plots, and to find the different options available for each element type. Unless you have the world's best memory it will be almost impossible to remember every single possible option here!
+Cela vaut la peine de se familiariser avec la documentation pour savoir comment modifier les différents aspects de ces graphiques, et pour trouver les différentes options disponibles pour chaque type d'élément. A moins que vous n'ayez la meilleure mémoire du monde, il sera presque impossible de vous souvenir de toutes les options possibles ici !
 
 
-`element_blank` is also worth knowing about, as this removes elements completely. 
-So for example, if we do not want any x axis labels at all we can set `axis.text.x` to be an `element_blank`
+`element_blank` vaut également la peine d'être connu, car il supprime complètement les éléments. 
+Ainsi, par exemple, si nous ne voulons pas du tout d'étiquettes pour l'axe des x, nous pouvons définir `axis.text.x` comme un `element_blank`.
 
 ```{r boldsize2, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -422,15 +423,15 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")+
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")+
     theme(axis.text.x = element_blank())
 ```
 
-Perhaps a more useful modification would be to remove the legend, which is duplicating the information we already have on the x axis. We can do this my modifying the theme element "legend.position" and set this to "none". We could also use this same argument if we wanted the legend to be below the plot, "bottom", above the plot ("top"), or to the left hand side ("left").
+Une modification plus utile serait peut-être de supprimer la légende, qui fait double emploi avec les informations que nous avons déjà sur l'axe des x. Nous pouvons le faire en modifiant l'élément de thème "legend.position" et en lui attribuant la valeur "none". Nous pourrions également utiliser ce même argument si nous voulions que la légende soit en dessous du graphique ("bottom"), au-dessus du graphique ("top"), ou sur le côté gauche ("left").
 
 ```{r boldsize3, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -438,18 +439,18 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")+
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")+
   theme(legend.position = "none")
 ```
 
-While the `theme()` function lets us control every possible aspect of these plots, we can also use built-in themes instead. These will make many changes all at the same time. You can see a gallery of all the built in themes here:
+Bien que la fonction `theme()` nous permette de contrôler tous les aspects possibles de ces graphiques, nous pouvons également utiliser des thèmes pré-définis. Ceux-ci apporteront de nombreux changements en même temps. Vous pouvez voir une galerie de tous les thèmes pré-définis ici :
 https://ggplot2.tidyverse.org/reference/ggtheme.html
 
-A popular choice is to use the 'light' theme:
+Un choix populaire est d'utiliser le thème "light" :
 
 ```{r boldsize4, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -457,17 +458,17 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")+
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")+
   theme(legend.position = "none")+
   theme_light()
 ```
 
-Note that the order matters. Look - the legend has re-appeared!
-Setting a built in theme over-rules any previous calls to `theme()`. But we can still modify elements of the default theme after it has been set. So to use the light theme with the legend removed we need to change the order of the final two lines.
+Notez que l'ordre est important. Regardez - la légende est réapparue !
+La définition d'un thème intégré annule tous les appels précédents à `theme()`. Mais nous pouvons toujours modifier les éléments du thème par défaut après qu'il ait été défini. Ainsi, pour utiliser le thème light sans la légende, nous devons changer l'ordre des deux dernières lignes.
 
 ```{r boldsize4a, exercise=TRUE}
 ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) + 
@@ -475,24 +476,24 @@ ggplot(data = BeanSurvey,  aes(y = BEANSHARVESTED_LR,x=GENDERHH,fill=GENDERHH)) 
     scale_y_log10()+
       scale_fill_brewer(palette="Dark2")+
           facet_wrap(~VILLAGE)+
-        labs(x="Gender of Household Head",y="Beans Harvested In Long Rains (Kg)",
-             fill="Gender of Household Head",
-              title="Boxplots showing difference in quantity of harvested beans by gender",
-                subtitle="Split by village",
-                  caption="Data collected from interviews with 49 farmers conducted in May 2019")+
+        labs(x="Sexe du chef de ménage",y="Récolte de la longue saison des pluies (Kg)",
+             fill="Sexe du chef de ménage",
+              title="Boxplots montrant la quantité de haricots récoltés par sexe",
+                subtitle="Répartition par village",
+                  caption="Données recueillies lors d'entretiens avec 49 agriculteurs menés en mai 2019")+
   theme_light()+
   theme(legend.position = "none")
 ```
 
-And now we are done with our plot.
+Et maintenant, nous en avons terminé avec notre graphique.
 
-We will learn more about different types of plots, and other ways of modifying plots as the course continues. But for now it is time to do some more practice!
-
-
-##Exercises
+Nous en apprendrons davantage sur les différents types de graphique et sur d'autres façons de les modifier au fil du cours. Mais pour l'instant, il est temps de s'entraîner un peu plus !
 
 
-**Question 1: I am trying to make a histogram of the farmer's ages with different panels for each village. Can you identify and fix the errors in my code?**
+## Exercices
+
+
+**Question 1 : J'essaie de produire un histogramme de l'âge des agriculteurs avec des facettes différentes pour chaque village. Pouvez-vous identifier et corriger les erreurs dans mon code ?**
 ```{r exc1, exercise=TRUE,error=TRUE}
 
 ggplot(BeanSurvey,aes(x=AGEHH))+
@@ -502,7 +503,7 @@ ggplot(BeanSurvey,aes(x=AGEHH))+
 ```
 
 
-**Question 2a: I am making a barplot of decision making, by gender of the household head. Can you modify the code, so that it looks like the example below with female headed households coloured in 'purple' and male headed households coloured in 'orange'**
+**Question 2a: Je réalise un diagramme en bâtons du responsable de la prise de décision dans le menage, par le sexe du chef de ménage. Pouvez-vous modifier le code de façon à ce qu'il ressemble à l'exemple ci-dessous, avec les ménages dirigés par une femme colorés en "violet" et les ménages dirigés par un homme colorés en "orange" ?**
 
 
 ```{r, echo=FALSE}
@@ -520,41 +521,43 @@ ggplot(BeanSurvey,aes(y=DECISIONS))+
 
 ```
 
-**Question 2b: Taking the plot you created in Question 2a, now make some changes to the labels: i) remove the y axis label; ii) Change the x axis label to read "Number of Farmers"; iii) Add an informative title
+**Question 2b: En reprenant le graphique que vous avez créé à la question 2a, apportez maintenant quelques modifications aux étiquettes : i) supprimez l'étiquette de l'axe des y ; ii) changez l'étiquette de l'axe des x par "Nombre d'agriculteurs" ; iii) ajoutez un titre informatif**
 
 ```{r exc2b, exercise=TRUE}
 ```
 
 
-**Question 3: Make a scatter plot of the harvested quantities of beans in the long rains against the planted quantity of beans in the long rains. Place the harvested quantity on the y axis, and the planted quantity on the x axis.**
+**Question 3: Faites un nuage de points montrant la quantité de haricots récoltés pendant la longue saison des pluies par rapport aux quantités de haricots plantés pendant la longue saison des pluies. Placez la quantité récoltée sur l'axe des y, et la quantité plantée sur l'axe des x.**
+
 ```{r exc3a, exercise=TRUE}
 ```
 
-**Now consider how to also show how the different villages are associated with this this relationship. 
-Try two different options:
-a) Make different coloured points for each village**
+**Réfléchissez maintenant à la façon de montrer également comment les différents villages sont associés à cette relation. Essayez deux options différentes :**
+
+**a) Faites des points de couleur différente pour chaque village**
 
 ```{r exc3b, exercise=TRUE}
 ```
 
-**b) Put the two villages in different panels**
+**b) Placer les deux villages dans des facettes/panneaux différents**
 
 ```{r exc3c, exercise=TRUE}
 ```
 
-**Consider which of these two plots shows the relationship more clearly. Take your preferred plot, and tidy up the axis labels and titles.**
+**Considérez lequel de ces deux graphiques montre le plus clairement la relation. Prenez le graphique que vous préférez, et ajoutez les étiquettes et les titres des axes.**
 
 ```{r exc3d, exercise=TRUE}
 
 ```
 
 
-**Question 4a: Make a plot showing how the quantity of beans harvested in the long rains is related to the household type (`HHTYPE`). Choose a sensible geometry to show this relationship.**
+**Question 4a: Faites un graphique montrant comment la quantité de haricots récoltés pendant la longue saison des pluies est liée au type de ménage (`HHTYPE`). Choisissez une géométrie pertinente pour montrer cette relation.**
 ```{r exc4a, exercise=TRUE}
 
 ```
 
-**Question 4b: Whatever plot you decided on for question 4a, you may have found that because the labels for the `LABOR` variable are quite long, the text along the axis became squashed. Look into the elements which can be customised within `theme` and try to make these labels fit better by decreasing the font size or modifying the angle at which the labels are aligned to the axis**
+**Question 4b: Quel que soit le tracé que vous avez choisi pour la question 4a, vous avez peut-être constaté que les étiquettes de la variable `LABOR` sont assez longues et que le texte le long de l'axe est écrasé. Regardez les éléments qui peuvent être personnalisés dans `theme` et essayez de faire en sorte que ces étiquettes s'adaptent mieux en diminuant la taille de la police ou en modifiant l'angle auquel les étiquettes sont alignées sur l'axe.**
+
 ```{r exc4b, exercise=TRUE}
 
 ggplot(data=BeanSurvey,aes(y=BEANSHARVESTED_LR,x=HHTYPE))+
@@ -563,7 +566,7 @@ ggplot(data=BeanSurvey,aes(y=BEANSHARVESTED_LR,x=HHTYPE))+
 
 
 ```
-**Question 5: Make a plot showing the relationship between the gender of the household head (`GENDERHH`), village, (`VILLAGE`) and whether the household sells any of their beans (`SELLBEANS`). Include nice colours, sensible axis labels, a title, and use one of the custom built-in themes to make the plot look nice. Also consider increasing the font size for some of the labels so they can be read more clearly.**
+**Question 5: Faites un graphique montrant la relation entre le sexe du chef de ménage (`GENDERHH`), le village, (`VILLAGE`) et le fait que le ménage vende ou non ses haricots (`SELLBEANS`). Utilisez des couleurs agréables, des étiquettes d'axes sensées, un titre, et utilisez l'un des thèmes pré-définis pour que le graphique soit agréable à regarder. Pensez également à augmenter la taille de la police pour certaines étiquettes afin qu'elles soient plus lisibles.**
 
 ```{r exc5, exercise=TRUE}
 
@@ -572,49 +575,48 @@ ggplot(data=BeanSurvey,aes(y=BEANSHARVESTED_LR,x=HHTYPE))+
 
 
 
-## Appendix: 'BeanSurvey' dataset 
+## Annexe : Données "BeanSurvey" 
 
-The data we are using in this session is an extract of a survey conducted in Uganda from farmers identified as growing beans.
+Les données que nous utilisons dans cette session sont un extrait d'une enquête menée en Ouganda auprès d'agriculteurs identifiés comme cultivant des haricots.
 
-The dataset contains an extract of 50 responses to 23 of the survey questions, and has been imported to R as a data frame called `BeanSurvey`.
+Le jeu de données contient un extrait de 50 réponses à 23 des questions de l'enquête, et a été importé dans R comme un cadre de données appelé `BeanSurvey`.
 
-A summary of the columns in the dataset is below.
+Vous trouverez ci-dessous un résumé des colonnes du jeu de données.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE}
 
 
 data.frame(Column=colnames(BeanSurvey),
-           Description=c("Farmer ID","Village name","Household composition","Gender of Household Head","Age of Household Head",
-                         "Occupation of Household Head","Number of Adults within the household","Number of Children (<18) within the household","Do they grow matoke?",
-                         "Do they grow maize?","Do they grow beans?","Do they grow banana?","Do they grow cassava?",
-                         "Do they grow coffee?","Land area of farm (acres)","Labor usage","Intercrops with beans",
-                         "Household decision responsibility","Do they grow beans for sale?","Quantity of beans planted in long rain season",
-                         "Quantity of beans planted in short rain season","Quantity of beans harvested in long rain season"
-                         ,"Quantity of beans harvested in short rain season")) %>% kable()
+           Description=c("ID de l'agriculteur", "Nom du village", "Composition du ménage", "Sexe du chef de ménage", "Âge du chef de ménage",
+                         "Occupation du chef de ménage", "Nombre d'adultes dans le ménage", "Nombre d'enfants (<18) dans le ménage", "Cultivent-ils le matoke ?",
+                         "Cultivent-ils du maïs ?", "Cultivent-ils des haricots ?", "Cultivent-ils des bananes ?", "Cultivent-ils du manioc ?",
+                         "Cultivent-ils du café ?", "Superficie de l'exploitation (acres)", "Utilisation de la main-d'œuvre", "Cultures associee aux haricots",
+                         "Responsabilité des décisions du ménage", "Cultivent-ils des haricots pour la vente ?", "Quantité de haricots plantés pendant la longue saison des pluies",
+                         "Quantité de haricots plantés pendant la courte saison des pluies", "Quantité de haricots récoltés pendant la longue saison des pluies",
+                         "Quantité de haricots récoltés pendant la courte saison des pluies")) %>% kable()
 
 ```
 
 
-Spend some time looking through the exploring the full dataset embedded below, to familiarise yourself with the columns and the type of data stored within each column. You may need to refer back to this data at times during this tutorial. Remember that R is case sensitive, so you will always have to refer to the variables in this dataset exactly as they are written in the data. There is a column in this data called "GENDERHH" but there is no column in this data called "GenderHH".
+Passez un peu de temps à explorer l'ensemble de données complet intégré ci-dessous, afin de vous familiariser avec les colonnes et le type de données stockées dans chaque colonne. Vous aurez peut-être besoin de vous référer à ces données à plusieurs reprises au cours de ce tutoriel. N'oubliez pas que R est sensible à la casse, vous devrez donc toujours faire référence aux variables de cet ensemble de données exactement comme elles sont écrites dans les données. Il y a une colonne dans ces données appelée "GENDERHH" mais il n'y a pas de colonne dans ces données appelée "GenderHH".
 
 ```{r,echo=FALSE}
 DT::datatable(BeanSurvey)
 ```
 
-(You can use the arrow keys on your keyboard to scroll right in case the data table does not fit entirely on your screen)
+(Vous pouvez utiliser les touches fléchées de votre clavier pour faire défiler vers la droite au cas où le tableau de données ne tiendrait pas entièrement sur votre écran).
 
 
-## Appendix: Useful reference links  
+## Annexe : Liens de référence utiles  
 
-R Graphics Cookbook: <a href="http://www.cookbook-r.com/Graphs/" target="_blank">http://www.cookbook-r.com/Graphs/</a> 
+Comment definir la couleur, les facets etc. dans ggplot:<a href="https://bookdown.org/ael/rexplor/chap6-3.html" target="_blank">https://bookdown.org/ael/rexplor/chap6-3.html </a>  
 
-ggplot2 CheatSheet:<a href="https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" target="_blank">https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf   </a>  
+Liste des couleurs que R reconnait: <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target="_blank">http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf     </a>   
 
-R Color Chart: <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target="_blank">http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf     </a>   
+Aide mémoire ggplot2: <a href="https://thinkr.fr/aide-memoire-ggplot2/" target="_blank">https://thinkr.fr/aide-memoire-ggplot2/</a> 
 
-ggplot2 manuals (warning - technical and slightly pretentious. First line "ggplot2... embodies a deep philosophy of visualisation"): <a href="https://ggplot2.tidyverse.org/" target="_blank">https://ggplot2.tidyverse.org/     </a>     
 
-Plotting with ggplot - Roger Peng videos:
-<a href="https://www.youtube.com/watch?v=HeqHMM4ziXA" target="_blank">Part 1    </a>  
-<a href="https://www.youtube.com/watch?v=n8kYa9vu1l8" target="_blank">Part 2 </a>  
+Le manuel officiel de ggplot2 (assez technique et en anglais): <a href="https://ggplot2.tidyverse.org/" target="_blank">https://ggplot2.tidyverse.org/     </a> 
+
+Introduction à ggplot2: <a href="https://juba.github.io/tidyverse/08-ggplot2.html" target="_blank">https://juba.github.io/tidyverse/08-ggplot2.html</a>   
 
